@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const TodoUpdate = ({ todo, index, onUpdateTodo }) => {
-  const [inputText, setInputText] = useState(todo);
+const TodoUpdate = ({ todo, id, onUpdateTodo }) => {
+  const [inputText, setInputText] = useState(todo.text);
   const [isEmptyText, setIsEmptyText] = useState(false);
 
   const onInputChange = (event) => {
@@ -15,13 +15,13 @@ const TodoUpdate = ({ todo, index, onUpdateTodo }) => {
       setIsEmptyText(true);
     } else {
       setIsEmptyText(false);
-      onUpdateTodo(index, inputText);
+      onUpdateTodo(id, inputText);
     }
   };
 
   return (
     <div>
-      <input type="checkbox" id={`modal-${index}`} className="modal-toggle" />
+      <input type="checkbox" id={`modal-${id}`} className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">Update Todo</h3>
@@ -30,7 +30,7 @@ const TodoUpdate = ({ todo, index, onUpdateTodo }) => {
             placeholder="Update todo"
             value={inputText}
             onChange={(event) => onInputChange(event)}
-            className="input input-lg nput-bordered input-success w-full mt-4"
+            className="input input-lg input-bordered w-full mt-4"
           />
           {isEmptyText ? (
             <p className="text-xl text-rose-500 font-semibold mt-2">
@@ -41,16 +41,13 @@ const TodoUpdate = ({ todo, index, onUpdateTodo }) => {
           )}
           <div className="modal-action">
             <label
-              htmlFor={`modal-${index}`}
+              htmlFor={`modal-${id}`}
               onClick={(event) => onButtonClick(event)}
               className="btn btn-primary text-white"
             >
               Submit
             </label>
-            <label
-              htmlFor={`modal-${index}`}
-              className="btn btn-error text-white"
-            >
+            <label htmlFor={`modal-${id}`} className="btn btn-error text-white">
               Close
             </label>
           </div>
